@@ -1,0 +1,22 @@
+{
+  "name": "@workspace/api-zod",
+  "version": "0.1.0",
+  "private": true,
+  "type": "module",
+  "main": "./generated/index.ts",
+  "types": "./generated/index.ts",
+  "exports": {
+    ".": "./generated/index.ts",
+    "./users": "./generated/users/users.ts",
+    "./posts": "./generated/posts/posts.ts",
+    "./settings": "./generated/settings/settings.ts",
+    "./account": "./generated/account/account.ts",
+    "./auth": "./generated/auth/auth.ts",
+    "./uploads": "./generated/uploads/uploads.ts",
+    "./departments": "./generated/departments/departments.ts",
+    "./categories": "./generated/categories/categories.ts"
+  },
+  "dependencies": {
+    "zod": "^4.3.6"
+  }
+}

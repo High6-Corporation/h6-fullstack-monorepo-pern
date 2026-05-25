@@ -1,0 +1,7 @@
+packages:
+  - artifacts/*
+  - lib/*
+
+ignoredBuiltDependencies:
+  - '@clerk/shared'
+  - esbuild
