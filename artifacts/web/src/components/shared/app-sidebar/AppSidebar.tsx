@@ -15,7 +15,6 @@ import {
 } from "@/components/ui/sidebar"
 import { mainNavItems, navSecondary } from "@/data/main-nav-items"
 import { NavUser } from "./NavUser"
-import { cn } from "@/lib/utils"
 
 export function AppSidebar({
   userName,
@@ -100,13 +99,7 @@ export function AppSidebar({
                     <SidebarMenuItem key={item.title}>
                       <SidebarMenuButton
                         asChild
-                        // isActive={isActive}
-                        className={cn(
-                                          "flex items-center gap-2 rounded-md px-3 py-2 text-sm whitespace-nowrap hover:bg-accent hover:text-accent-foreground",
-                                          isActive
-                                            ? "bg-red-500 font-medium text-foreground"
-                                            : "text-muted-foreground"
-                                        )}
+                        isActive={isActive}
                         tooltip={item.title}
                       >
                         <Link to={item.url}>
