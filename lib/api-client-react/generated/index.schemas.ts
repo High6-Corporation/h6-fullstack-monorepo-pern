@@ -186,43 +186,7 @@ export interface DepartmentsPageEnvelope {
   meta: PaginationMeta;
 }
 
-export interface CategoryInput {
-  /** @minLength 1 */
-  name: string;
-  /** @nullable */
-  description?: string | null;
-}
-
-export interface Category {
-  id: string;
-  name: string;
-  /** @nullable */
-  description?: string | null;
-  createdAt: string;
-  updatedAt: string;
-}
-
-export interface CategoryEnvelope {
-  success: boolean;
-  data: Category;
-}
-
-export interface CategoriesPageEnvelope {
-  success: boolean;
-  data: Category[];
-  links: PaginationLinks;
-  meta: PaginationMeta;
-}
-
-export type SecurityEnvelopeData = {
-  /** @nullable */
-  passwordUpdatedAt: string | null;
-};
-
-export interface SecurityEnvelope {
-  success: boolean;
-  data: SecurityEnvelopeData;
-}
+export interface SecurityEnvelope {}
 
 export interface SettingsInput { [key: string]: unknown }
 
@@ -297,19 +261,6 @@ page?: number;
  */
 perPage?: number;
 isActive?: boolean;
-};
-
-export type GetCategoriesParams = {
-q?: string;
-/**
- * @minimum 1
- */
-page?: number;
-/**
- * @minimum 1
- * @maximum 100
- */
-perPage?: number;
 };
 
 export type GetPostsParams = {

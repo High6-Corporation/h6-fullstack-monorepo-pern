@@ -13,8 +13,7 @@
     "./account": "./generated/account/account.ts",
     "./auth": "./generated/auth/auth.ts",
     "./uploads": "./generated/uploads/uploads.ts",
-    "./departments": "./generated/departments/departments.ts",
-    "./categories": "./generated/categories/categories.ts"
+    "./departments": "./generated/departments/departments.ts"
   },
   "dependencies": {
     "zod": "^4.3.6"

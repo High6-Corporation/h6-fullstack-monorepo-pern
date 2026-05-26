@@ -7,7 +7,6 @@ import {
   MessageCircleQuestion,
   Settings,
   UserCircle,
-  Tags,
 } from "lucide-react"
 
 export interface NavItem {
@@ -31,7 +30,6 @@ export const mainNavItems: NavSection[] = [
     title: "Management",
     items: [
       { title: "Departments", url: "/departments", icon: Building2 },
-      { title: "Categories", url: "/categories", icon: Tags },
       { title: "Posts", url: "/posts", icon: Newspaper },
       { title: "Users", url: "/users", icon: Users },
     ],

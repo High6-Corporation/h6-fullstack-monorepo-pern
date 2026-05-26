@@ -8,7 +8,6 @@ import { PostsController } from "../controllers/PostsController.js"
 import { DepartmentsController } from "../controllers/DepartmentsController.js"
 import { SettingsController } from "../controllers/SettingsController.js"
 import { UploadController } from "../controllers/UploadController.js"
-import { CategoriesController } from "../controllers/CategoriesController.js"
 
 const upload = multer({
   storage: multer.memoryStorage(),
@@ -46,13 +45,6 @@ apiRouter.post("/posts", requireAuth, PostsController.store)
 apiRouter.get("/posts/:id", requireAuth, PostsController.show)
 apiRouter.patch("/posts/:id", requireAuth, PostsController.update)
 apiRouter.delete("/posts/:id", requireAuth, PostsController.destroy)
-
-// --- categories ---
-apiRouter.get("/categories", requireAuth, CategoriesController.index)
-apiRouter.post("/categories", requireAuth, CategoriesController.store)
-apiRouter.get("/categories/:id", requireAuth, CategoriesController.show)
-apiRouter.patch("/categories/:id", requireAuth, CategoriesController.update)
-apiRouter.delete("/categories/:id", requireAuth, CategoriesController.destroy)
 
 // --- settings ---
 apiRouter.get("/settings/general", SettingsController.general)

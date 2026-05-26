@@ -11,7 +11,6 @@ import {
 import { securitySettings } from "./account"
 import { accounts, sessions } from "./auth"
 import { departments } from "./departments"
-import { categories } from "./categories"
 
 // Re-export all schema tables
 export {
@@ -26,7 +25,6 @@ export {
   accounts,
   sessions,
   departments,
-  categories,
 }
 
 // Re-export types
@@ -40,7 +38,6 @@ export type {
 } from "./settings"
 export type { SelectSecuritySettings } from "./account"
 export type { SelectDepartment, InsertDepartment } from "./departments"
-export type { SelectCategory, InsertCategory } from "./categories"
 export { verificationTokens } from "./auth"
 
 // --- Relations ---
