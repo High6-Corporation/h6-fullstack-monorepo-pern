@@ -1,7 +1,7 @@
 
 import { zodResolver } from "@hookform/resolvers/zod"
 import { useForm, Controller } from "react-hook-form"
-import { z } from "zod"
+import { z } from "zod/v4"
 import {
   Card,
   CardHeader,
@@ -51,7 +51,7 @@ export function SecuritySettingsForm({
   initialValues: SecuritySettings
 }) {
   const form = useForm<SecurityFormValues>({
-    resolver: zodResolver(securitySchema),
+    resolver: zodResolver(securitySchema as never),
     defaultValues: {
       currentPassword: "",
       newPassword: "",

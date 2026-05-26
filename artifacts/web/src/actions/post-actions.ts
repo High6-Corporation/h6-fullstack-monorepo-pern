@@ -19,6 +19,7 @@ export async function createPostAction(
   data: PostActionData
 ): Promise<ActionResult> {
   return runAction(() => postPosts(data), "Failed to create post")
+  
 }
 
 export async function updatePostAction(

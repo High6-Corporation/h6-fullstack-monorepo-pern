@@ -1,5 +1,6 @@
 import { useNavigate } from "react-router-dom"
 import { useState } from "react"
+import { useQueryClient } from "@tanstack/react-query"
 import {
   Page,
   PageHeader,
@@ -21,6 +22,7 @@ import { DeleteConfirmDialog } from "@/components/shared/delete-confirm-dialog/D
 import { deletePostAction } from "@/actions/post-actions"
 import { Pencil, Trash2, User, Calendar } from "lucide-react"
 import { toast } from "sonner"
+import { getGetPostsQueryKey } from "@workspace/api-client-react/generated/posts/posts"
 
 interface PostDetailViewProps {
   post: ApiPost
@@ -34,6 +36,7 @@ export default function PostDetailView({
   users,
 }: PostDetailViewProps) {
   const navigate = useNavigate()
+  const queryClient = useQueryClient()
   const [sheetOpen, setSheetOpen] = useState(false)
   const [deleteOpen, setDeleteOpen] = useState(false)
   const [isDeleting, setIsDeleting] = useState(false)
@@ -55,6 +58,7 @@ export default function PostDetailView({
     setDeleteOpen(false)
     if (result.success) {
       toast.success("Post deleted")
+      await queryClient.invalidateQueries({ queryKey: getGetPostsQueryKey() })
       navigate("/posts")
     } else {
       toast.error(result.error ?? "Failed to delete post")

@@ -1,5 +1,5 @@
 import type { Response } from "express"
-import type { ZodError } from "zod"
+import type { ZodError } from "zod/v4"
 
 export function ok<T>(res: Response, data: T, status = 200) {
   return res.status(status).json({ success: true, data })

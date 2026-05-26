@@ -2,7 +2,8 @@
 import { useEffect } from "react"
 import { zodResolver } from "@hookform/resolvers/zod"
 import { useForm } from "react-hook-form"
-import { z } from "zod"
+import { z } from "zod/v4"
+import { useQueryClient } from "@tanstack/react-query"
 import {
   Sheet,
   SheetContent,
@@ -19,6 +20,7 @@ import {
 import { InputField } from "@/components/shared/form/InputField"
 import { createUserAction, updateUserAction } from "@/actions/user-actions"
 import { toast } from "sonner"
+import { getGetUsersQueryKey } from "@workspace/api-client-react/generated/users/users"
 
 const baseFields = {
   firstName: z.string().min(1, "First name is required"),
@@ -70,6 +72,7 @@ export default function UserSheetForm({
   onOpenChange,
   user,
 }: UserSheetFormProps) {
+  const queryClient = useQueryClient()
   const isEdit = !!user
 
   // Create and update share a form shape; `password` is only read in create
@@ -80,7 +83,7 @@ export default function UserSheetForm({
     reset,
     formState: { isSubmitting },
   } = useForm<CreateUserFormValues>({
-    resolver: zodResolver(isEdit ? updateSchema : createSchema) as never,
+    resolver: zodResolver((isEdit ? updateSchema : createSchema) as never),
     defaultValues: EMPTY_CREATE,
   })
 
@@ -123,6 +126,7 @@ export default function UserSheetForm({
 
     if (result.success) {
       toast.success(isEdit ? "User updated" : "User created")
+      await queryClient.invalidateQueries({ queryKey: getGetUsersQueryKey() })
       onOpenChange(false)
     } else {
       toast.error(result.error ?? "Something went wrong")

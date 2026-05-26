@@ -1,4 +1,4 @@
-import { z } from "zod"
+import { z } from "zod/v4"
 
 export const generalSettingsSchema = z.object({
   appName: z.string().min(1, "App name is required"),
