@@ -156,73 +156,7 @@ export interface PostsPageEnvelope {
   meta: PaginationMeta;
 }
 
-export interface DepartmentInput {
-  /** @minLength 1 */
-  name: string;
-  /** @nullable */
-  description?: string | null;
-  isActive?: boolean;
-}
-
-export interface Department {
-  id: string;
-  name: string;
-  /** @nullable */
-  description?: string | null;
-  isActive: boolean;
-  createdAt: string;
-  updatedAt: string;
-}
-
-export interface DepartmentEnvelope {
-  success: boolean;
-  data: Department;
-}
-
-export interface DepartmentsPageEnvelope {
-  success: boolean;
-  data: Department[];
-  links: PaginationLinks;
-  meta: PaginationMeta;
-}
-
-export interface CategoryInput {
-  /** @minLength 1 */
-  name: string;
-  /** @nullable */
-  description?: string | null;
-}
-
-export interface Category {
-  id: string;
-  name: string;
-  /** @nullable */
-  description?: string | null;
-  createdAt: string;
-  updatedAt: string;
-}
-
-export interface CategoryEnvelope {
-  success: boolean;
-  data: Category;
-}
-
-export interface CategoriesPageEnvelope {
-  success: boolean;
-  data: Category[];
-  links: PaginationLinks;
-  meta: PaginationMeta;
-}
-
-export type SecurityEnvelopeData = {
-  /** @nullable */
-  passwordUpdatedAt: string | null;
-};
-
-export interface SecurityEnvelope {
-  success: boolean;
-  data: SecurityEnvelopeData;
-}
+export interface SecurityEnvelope {}
 
 export interface SettingsInput { [key: string]: unknown }
 
@@ -284,33 +218,6 @@ export const GetUsersDir = {
   asc: 'asc',
   desc: 'desc',
 } as const;
-
-export type GetDepartmentsParams = {
-q?: string;
-/**
- * @minimum 1
- */
-page?: number;
-/**
- * @minimum 1
- * @maximum 100
- */
-perPage?: number;
-isActive?: boolean;
-};
-
-export type GetCategoriesParams = {
-q?: string;
-/**
- * @minimum 1
- */
-page?: number;
-/**
- * @minimum 1
- * @maximum 100
- */
-perPage?: number;
-};
 
 export type GetPostsParams = {
 q?: string;

@@ -12,9 +12,7 @@
     "./settings": "./generated/settings/settings.ts",
     "./account": "./generated/account/account.ts",
     "./auth": "./generated/auth/auth.ts",
-    "./uploads": "./generated/uploads/uploads.ts",
-    "./departments": "./generated/departments/departments.ts",
-    "./categories": "./generated/categories/categories.ts"
+    "./uploads": "./generated/uploads/uploads.ts"
   },
   "dependencies": {
     "zod": "^4.3.6"

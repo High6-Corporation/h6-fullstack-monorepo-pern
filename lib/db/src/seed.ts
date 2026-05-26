@@ -24,7 +24,6 @@ const {
   appearanceSettings,
   notificationsSettings,
   securitySettings,
-  departments,
 } = await import("./schema")
 // Minimal defaults — seed only needs to record neutral light/dark vars.
 const DEFAULT_LIGHT: Record<string, string> = {}
@@ -590,21 +589,6 @@ async function seedPosts() {
   console.log(`Seeded ${postData.length} posts`)
 }
 
-
-async function seedDepartments() {
-  const departmentData = [
-    { name: "Management", description: "Leadership and operations" },
-    { name: "Development", description: "Frontend, backend, and integrations" },
-    { name: "QA", description: "Quality assurance and release checks" },
-  ]
-
-  await db
-    .insert(departments)
-    .values(departmentData)
-    .onConflictDoNothing()
-  console.log(`Seeded ${departmentData.length} departments`)
-}
-
 async function seedSettings() {
   // General settings
   await db
@@ -685,7 +669,6 @@ async function main() {
   console.log("Seeding database...")
   await seedUsers()
   await seedPosts()
-  await seedDepartments()
   await seedSettings()
   console.log("Done!")
   process.exit(0)

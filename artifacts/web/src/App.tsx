@@ -11,9 +11,6 @@ const UsersIndexPage = lazy(() => import("./pages/users/UsersIndexPage"))
 const UserDetailPage = lazy(() => import("./pages/users/UserDetailPage"))
 const PostsIndexPage = lazy(() => import("./pages/posts/PostsIndexPage"))
 const PostDetailPage = lazy(() => import("./pages/posts/PostDetailPage"))
-const CategoriesIndexPage = lazy(() => import("./pages/categories/CategoriesIndexPage"))
-const CategoryDetailPage = lazy(() => import("./pages/categories/CategoryDetailPage"))
-const DepartmentsIndexPage = lazy(() => import("./pages/departments/DepartmentsIndexPage"))
 const AccountIndexPage = lazy(() => import("./pages/account/AccountIndexPage"))
 const ProfilePage = lazy(() => import("./pages/account/ProfilePage"))
 const SecurityPage = lazy(() => import("./pages/account/SecurityPage"))
@@ -50,11 +47,8 @@ export function App() {
             <Route index element={<DashboardPage />} />
             <Route path="/users" element={<UsersIndexPage />} />
             <Route path="/users/:id" element={<UserDetailPage />} />
-            <Route path="/departments" element={<DepartmentsIndexPage />} />
             <Route path="/posts" element={<PostsIndexPage />} />
             <Route path="/posts/:id" element={<PostDetailPage />} />
-            <Route path="/categories" element={<CategoriesIndexPage />} />
-            <Route path="/categories/:id" element={<CategoryDetailPage />} />
             <Route path="/account" element={<AccountIndexPage />} />
             <Route path="/account/profile" element={<ProfilePage />} />
             <Route path="/account/security" element={<SecurityPage />} />
