@@ -5,7 +5,6 @@ import { AuthController } from "../controllers/AuthController.js"
 import { AccountController } from "../controllers/AccountController.js"
 import { UsersController } from "../controllers/UsersController.js"
 import { PostsController } from "../controllers/PostsController.js"
-import { DepartmentsController } from "../controllers/DepartmentsController.js"
 import { SettingsController } from "../controllers/SettingsController.js"
 import { UploadController } from "../controllers/UploadController.js"
 
@@ -31,13 +30,6 @@ apiRouter.get("/users/:id", requireAuth, UsersController.show)
 apiRouter.patch("/users/:id", requireAuth, UsersController.update)
 apiRouter.delete("/users/:id", requireAuth, UsersController.destroy)
 
-
-// --- departments: gold-standard sample module ---
-apiRouter.get("/departments", requireAuth, DepartmentsController.index)
-apiRouter.post("/departments", requireAuth, DepartmentsController.store)
-apiRouter.get("/departments/:id", requireAuth, DepartmentsController.show)
-apiRouter.patch("/departments/:id", requireAuth, DepartmentsController.update)
-apiRouter.delete("/departments/:id", requireAuth, DepartmentsController.destroy)
 
 // --- posts ---
 apiRouter.get("/posts", requireAuth, PostsController.index)

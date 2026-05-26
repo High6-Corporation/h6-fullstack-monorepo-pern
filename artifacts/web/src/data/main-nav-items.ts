@@ -2,7 +2,6 @@ import {
   LayoutDashboard,
   Users,
   Newspaper,
-  Building2,
   type LucideIcon,
   MessageCircleQuestion,
   Settings,
@@ -29,7 +28,6 @@ export const mainNavItems: NavSection[] = [
   {
     title: "Management",
     items: [
-      { title: "Departments", url: "/departments", icon: Building2 },
       { title: "Posts", url: "/posts", icon: Newspaper },
       { title: "Users", url: "/users", icon: Users },
     ],

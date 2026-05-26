@@ -10,7 +10,6 @@ import {
 } from "./settings"
 import { securitySettings } from "./account"
 import { accounts, sessions } from "./auth"
-import { departments } from "./departments"
 
 // Re-export all schema tables
 export {
@@ -24,7 +23,6 @@ export {
   securitySettings,
   accounts,
   sessions,
-  departments,
 }
 
 // Re-export types
@@ -37,7 +35,6 @@ export type {
   SelectHelpCenterSettings,
 } from "./settings"
 export type { SelectSecuritySettings } from "./account"
-export type { SelectDepartment, InsertDepartment } from "./departments"
 export { verificationTokens } from "./auth"
 
 // --- Relations ---
