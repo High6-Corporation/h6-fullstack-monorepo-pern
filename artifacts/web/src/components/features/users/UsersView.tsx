@@ -2,6 +2,7 @@ import { Link, useNavigate } from "react-router-dom"
 import { useState } from "react"
 
 import { ColumnDef } from "@tanstack/react-table"
+import { useQueryClient } from "@tanstack/react-query"
 import {
   Page,
   PageHeader,
@@ -22,6 +23,7 @@ import UserSheetForm, {
 } from "@/components/features/users/UserSheetForm"
 import { type User as ApiUser } from "@/types/api"
 import { deleteUserAction } from "@/actions/user-actions"
+import { getGetUsersQueryKey } from "@workspace/api-client-react/generated/users/users"
 import { getUserDisplayName, getUserInitials } from "@/lib/utils"
 import { Plus } from "lucide-react"
 import { toast } from "sonner"
@@ -108,6 +110,7 @@ export default function UsersView({
   pageSize,
 }: UsersViewProps) {
   const navigate = useNavigate()
+  const queryClient = useQueryClient()
   const [sheetOpen, setSheetOpen] = useState(false)
   const [selectedUser, setSelectedUser] = useState<User | undefined>()
   const [deleteOpen, setDeleteOpen] = useState(false)
@@ -145,6 +148,7 @@ export default function UsersView({
     setDeleteId(null)
     if (result.success) {
       toast.success("User deleted")
+      await queryClient.invalidateQueries({ queryKey: getGetUsersQueryKey() })
     } else {
       toast.error(result.error ?? "Failed to delete user")
     }

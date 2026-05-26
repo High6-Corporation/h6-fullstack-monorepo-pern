@@ -2,6 +2,7 @@ import { Link, useNavigate } from "react-router-dom"
 import { useState } from "react"
 
 import { ColumnDef } from "@tanstack/react-table"
+import { useQueryClient } from "@tanstack/react-query"
 import {
   Page,
   PageHeader,
@@ -26,6 +27,7 @@ import PostSheetForm, {
 } from "@/components/features/posts/PostSheetForm"
 import { type Post as ApiPost } from "@/types/api"
 import { deletePostAction } from "@/actions/post-actions"
+import { getGetPostsQueryKey } from "@workspace/api-client-react/generated/posts/posts"
 import { Plus } from "lucide-react"
 import { toast } from "sonner"
 
@@ -109,6 +111,7 @@ export default function PostsView({
   pageSize,
 }: PostsViewProps) {
   const navigate = useNavigate()
+  const queryClient = useQueryClient()
   const [sheetOpen, setSheetOpen] = useState(false)
   const [selectedPost, setSelectedPost] = useState<Post | undefined>()
   const [deleteOpen, setDeleteOpen] = useState(false)
@@ -144,6 +147,7 @@ export default function PostsView({
     setDeleteId(null)
     if (result.success) {
       toast.success("Post deleted")
+      await queryClient.invalidateQueries({ queryKey: getGetPostsQueryKey() })
     } else {
       toast.error(result.error ?? "Failed to delete post")
     }
