@@ -2,7 +2,7 @@
 import { useState } from "react"
 import { useForm } from "react-hook-form"
 import { zodResolver } from "@hookform/resolvers/zod"
-import { z } from "zod"
+import { z } from "zod/v4"
 import {
   Page,
   PageHeader,
@@ -148,7 +148,7 @@ export default function FormTestView() {
     reset,
     formState: { isSubmitting, isDirty },
   } = useForm<FormTestValues>({
-    resolver: zodResolver(formTestSchema) as never,
+    resolver: zodResolver(formTestSchema as never),
     defaultValues: EMPTY_DEFAULTS,
   })
 

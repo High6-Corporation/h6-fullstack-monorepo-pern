@@ -2,7 +2,8 @@
 import { useEffect } from "react"
 import { zodResolver } from "@hookform/resolvers/zod"
 import { useForm } from "react-hook-form"
-import { z } from "zod"
+import { z } from "zod/v4"
+import { useQueryClient } from "@tanstack/react-query"
 import {
   Sheet,
   SheetContent,
@@ -20,6 +21,7 @@ import { toast } from "sonner"
 import { InputField } from "@/components/shared/form/InputField"
 import { SelectField } from "@/components/shared/form/SelectField"
 import { TextareaField } from "@/components/shared/form/TextareaField"
+import { getGetCategoriesQueryKey } from "@workspace/api-client-react/generated/categories/categories"
 
 const categoryFormSchema = z.object({
   name: z.string().min(1, { message: "Name is required" }),
@@ -47,7 +49,7 @@ export function CategoriesSheetForm({
   onOpenChange,
   category,
 }: CategoriesSheetFormProps) {
-
+  const queryClient = useQueryClient()
   const isEdit = !!category
   const {
       handleSubmit,
@@ -55,7 +57,7 @@ export function CategoriesSheetForm({
       reset,
       formState: { isSubmitting },
     } = useForm<CategoryFormValues>({
-      resolver: zodResolver(categoryFormSchema),
+      resolver: zodResolver(categoryFormSchema as never),
       defaultValues: {
         name: "",
         description: "",
@@ -82,6 +84,7 @@ export function CategoriesSheetForm({
 
       if (result.success) {
         toast.success(isEdit ? "Category updated" : "Category created")
+        await queryClient.invalidateQueries({ queryKey: getGetCategoriesQueryKey() })
         onOpenChange(false)
       } else {
         toast.error(result.error ?? "Something went wrong")

@@ -1,7 +1,7 @@
 
 import { zodResolver } from "@hookform/resolvers/zod"
 import { useForm, Controller } from "react-hook-form"
-import { z } from "zod"
+import { z } from "zod/v4"
 import { useQueryClient } from "@tanstack/react-query"
 import {
   Card,
@@ -48,7 +48,7 @@ export function GeneralSettingsForm({
     value && value.trim() ? value : null
 
   const form = useForm<GeneralFormValues>({
-    resolver: zodResolver(generalSchema),
+    resolver: zodResolver(generalSchema as never),
     defaultValues: {
       appName: initialValues.appName,
       appLogo: normalizeImageValue(initialValues.appLogo),

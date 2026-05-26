@@ -1,4 +1,4 @@
-import { z } from "zod"
+import { z } from "zod/v4"
 
 const emptyToUndef = (v: unknown) =>
   v && typeof v === "string" && v.trim().length > 0 ? v : undefined

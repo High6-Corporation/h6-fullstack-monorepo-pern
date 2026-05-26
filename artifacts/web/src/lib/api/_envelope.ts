@@ -1,4 +1,4 @@
-import { z } from "zod"
+import { z } from "zod/v4"
 import { ApiError, type RawApiResponse } from "@workspace/api-client-react"
 
 export function throwApiError(res: RawApiResponse): never {

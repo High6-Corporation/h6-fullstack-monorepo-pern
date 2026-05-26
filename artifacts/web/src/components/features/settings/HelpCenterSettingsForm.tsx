@@ -1,7 +1,7 @@
 
 import { zodResolver } from "@hookform/resolvers/zod"
 import { useForm, Controller } from "react-hook-form"
-import { z } from "zod"
+import { z } from "zod/v4"
 import {
   Card,
   CardHeader,
@@ -87,7 +87,7 @@ export function HelpCenterSettingsForm({
   initialValues: HelpCenterSettings
 }) {
   const form = useForm<HelpCenterFormValues>({
-    resolver: zodResolver(helpCenterSchema),
+    resolver: zodResolver(helpCenterSchema as never),
     defaultValues: {
       userManual: initialValues.userManual ?? null,
       companyName: initialValues.companyName,

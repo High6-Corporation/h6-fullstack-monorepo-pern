@@ -3,7 +3,7 @@ import { useState } from "react"
 
 import { zodResolver } from "@hookform/resolvers/zod"
 import { useForm } from "react-hook-form"
-import { z } from "zod"
+import { z } from "zod/v4"
 import {
   Card,
   CardHeader,
@@ -42,7 +42,7 @@ export function ProfileSettingsForm({
   const [avatarChanged, setAvatarChanged] = useState(false)
 
   const form = useForm<ProfileFormValues>({
-    resolver: zodResolver(profileSchema),
+    resolver: zodResolver(profileSchema as never),
     defaultValues: {
       firstName: initialValues.firstName,
       middleName: initialValues.middleName ?? "",

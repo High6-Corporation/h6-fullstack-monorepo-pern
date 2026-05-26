@@ -2,7 +2,8 @@
 import { useEffect } from "react"
 import { zodResolver } from "@hookform/resolvers/zod"
 import { useForm } from "react-hook-form"
-import { z } from "zod"
+import { z } from "zod/v4"
+import { useQueryClient } from "@tanstack/react-query"
 import {
   Sheet,
   SheetContent,
@@ -15,11 +16,12 @@ import {
   SubmitButton,
   CancelButton,
 } from "@/components/shared/form/FormActions"
-import { createPostAction, updatePostAction } from "@/actions/post-actions"
+import { createPostAction, updatePostAction, deletePostAction } from "@/actions/post-actions"
 import { toast } from "sonner"
 import { InputField } from "@/components/shared/form/InputField"
 import { SelectField } from "@/components/shared/form/SelectField"
 import { TextareaField } from "@/components/shared/form/TextareaField"
+import { getGetPostsQueryKey } from "@workspace/api-client-react/generated/posts/posts"
 
 const postSchema = z.object({
   title: z.string().min(1, "Title is required"),
@@ -56,6 +58,7 @@ export default function PostSheetForm({
   post,
   users,
 }: PostSheetFormProps) {
+  const queryClient = useQueryClient()
   const isEdit = !!post
 
   const {
@@ -64,7 +67,7 @@ export default function PostSheetForm({
     reset,
     formState: { isSubmitting },
   } = useForm<PostFormValues>({
-    resolver: zodResolver(postSchema),
+    resolver: zodResolver(postSchema as never),
     defaultValues: {
       title: "",
       body: "",
@@ -93,6 +96,7 @@ export default function PostSheetForm({
 
     if (result.success) {
       toast.success(isEdit ? "Post updated" : "Post created")
+      await queryClient.invalidateQueries({ queryKey: getGetPostsQueryKey() })
       onOpenChange(false)
     } else {
       toast.error(result.error ?? "Something went wrong")

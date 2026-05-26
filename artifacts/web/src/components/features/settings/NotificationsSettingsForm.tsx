@@ -1,7 +1,7 @@
 
 import { zodResolver } from "@hookform/resolvers/zod"
 import { useForm } from "react-hook-form"
-import { z } from "zod"
+import { z } from "zod/v4"
 import {
   Card,
   CardHeader,
@@ -36,7 +36,7 @@ export function NotificationsSettingsForm({
     reset,
     formState: { isSubmitting, isDirty },
   } = useForm<NotificationsFormValues>({
-    resolver: zodResolver(notificationsSchema),
+    resolver: zodResolver(notificationsSchema as never),
     defaultValues: {
       emailNotifications: initialValues.emailNotifications,
       pushNotifications: initialValues.pushNotifications,

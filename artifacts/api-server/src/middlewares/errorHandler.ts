@@ -1,5 +1,5 @@
 import type { Request, Response, NextFunction } from "express"
-import { ZodError } from "zod"
+import { ZodError } from "zod/v4"
 import { fail, failValidation } from "../lib/responses.js"
 
 export class HttpError extends Error {

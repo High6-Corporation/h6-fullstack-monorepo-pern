@@ -1,5 +1,6 @@
 import { useNavigate } from "react-router-dom"
 import { useState } from "react"
+import { useQueryClient } from "@tanstack/react-query"
 import {
   Page,
   PageHeader,
@@ -16,6 +17,7 @@ import { DeleteConfirmDialog } from "@/components/shared/delete-confirm-dialog/D
 import { deleteCategoryAction } from "@/actions/category-actions"
 import { Pencil, Trash2, CheckCircle2, XCircle } from "lucide-react"
 import { toast } from "sonner"
+import { getGetCategoriesQueryKey } from "@workspace/api-client-react/generated/categories/categories"
 
 interface CategoryDetailViewProps {
   category: Category
@@ -25,6 +27,7 @@ export default function CategoryDetailView({
   category,
 }: CategoryDetailViewProps) {
   const navigate = useNavigate()
+  const queryClient = useQueryClient()
   const [sheetOpen, setSheetOpen] = useState(false)
   const [deleteOpen, setDeleteOpen] = useState(false)
   const [isDeleting, setIsDeleting] = useState(false)
@@ -38,6 +41,7 @@ export default function CategoryDetailView({
     setDeleteOpen(false)
     if (result.success) {
       toast.success("Category deleted")
+      await queryClient.invalidateQueries({ queryKey: getGetCategoriesQueryKey() })
       navigate("/categories")
     } else {
       toast.error(result.error ?? "Failed to delete category")

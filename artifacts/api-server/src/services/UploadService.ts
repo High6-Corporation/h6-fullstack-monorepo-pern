@@ -1,6 +1,6 @@
 import { writeFile, mkdir } from "fs/promises"
 import { join, resolve } from "path"
-import { z } from "zod"
+import { z } from "zod/v4"
 
 const IMAGE_TYPES = [
   "image/png",
