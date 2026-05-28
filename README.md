@@ -21,6 +21,9 @@ Monorepo starter for High6 internal apps using:
 pnpm install
 cp .env.example .env
 # Update DATABASE_URL and other environment values in the root .env file.
+ # VITE_API_PROXY_TARGET must be set — the Vite dev server will fail to proxy
+# /api and /uploads requests if this value is missing. It should match the
+# PORT value set for the API server (default: http://localhost:3001).
 # drizzle-kit reads the .env from lib/db/drizzle.config.ts which points to the root .env.
 # Always use a fresh/empty PostgreSQL database on first setup to avoid schema conflicts.
 pnpm --filter @workspace/db run push
@@ -33,7 +36,8 @@ Default dev ports:
 - Web: `http://localhost:5000`
 - API: `http://localhost:3001`
 
-The Vite web app calls `/api` and `/uploads`; the dev server proxies them to the Express API.
+The Vite web app calls `/api` and `/uploads`; the dev server proxies them to the Express API
+using the `VITE_API_PROXY_TARGET` value from the root `.env` file.
 
 ## Schema changes
 
@@ -75,6 +79,7 @@ pnpm --filter @workspace/db run seed           # seed dev data
 4. Secrets must stay in `.env` or the hosting provider's secret manager. Do not commit `.env`, `.replit` userenv secrets, or uploaded runtime files.
 5. Generated build outputs like `dist/` and runtime uploads are intentionally excluded from this cleaned package.
 6. Always use `generate` + `migrate` (not `push`) when modifying schema on an existing database.
+7. `VITE_API_PROXY_TARGET` is required in the root `.env`. The Vite dev server reads it at startup to proxy `/api` and `/uploads` — there is no hardcoded fallback. If it is missing, all API calls will fail with a proxy error.
 
 ## Main folders
 
