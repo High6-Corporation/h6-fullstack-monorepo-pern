@@ -1,4 +1,5 @@
 import { Outlet } from "react-router-dom"
+import { useEffect } from "react"
 import {
   SidebarInset,
   SidebarProvider,
@@ -20,6 +21,31 @@ export function AuthLayout() {
   const appName = general?.appName ?? "High6 Suite"
   const appLogo = general?.appLogo ?? null
   const appIcon = general?.appIcon ?? null
+
+  // Update document title and favicon based on settings
+  useEffect(() => {
+    // Update page title
+    document.title = appName
+
+    // Update favicon
+    const faviconLink = document.querySelector(
+      "link[rel='icon']"
+    ) as HTMLLinkElement | null
+    if (faviconLink) {
+      if (appIcon) {
+        faviconLink.href = appIcon
+        // Detect if it's an ICO file or image
+        if (appIcon.endsWith(".ico")) {
+          faviconLink.type = "image/x-icon"
+        } else {
+          faviconLink.type = "image/png"
+        }
+      } else {
+        faviconLink.href = "/high6-icon.png"
+        faviconLink.type = "image/png"
+      }
+    }
+  }, [appName, appIcon])
 
   return (
     <SidebarProvider>
