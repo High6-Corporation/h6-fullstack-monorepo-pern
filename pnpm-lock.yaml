@@ -11,6 +11,9 @@ importers:
       '@clerk/clerk-react':
         specifier: ^5.61.3
         version: 5.61.3(react-dom@19.2.6(react@19.2.6))(react@19.2.6)
+      dotenv:
+        specifier: ^17.4.2
+        version: 17.4.2
       ulid:
         specifier: ^3.0.2
         version: 3.0.2

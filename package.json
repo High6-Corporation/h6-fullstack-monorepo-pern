@@ -24,6 +24,7 @@
   },
   "dependencies": {
     "@clerk/clerk-react": "^5.61.3",
+    "dotenv": "^17.4.2",
     "ulid": "^3.0.2"
   }
 }
